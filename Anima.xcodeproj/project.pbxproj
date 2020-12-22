@@ -15,6 +15,8 @@
 		A559100A258DE8920037ADA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5591008258DE8920037ADA7 /* LaunchScreen.storyboard */; };
 		A559100D258DE8920037ADA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A559100C258DE8920037ADA7 /* main.m */; };
 		A559101425904CC20037ADA7 /* cardvoice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A559101325904CC20037ADA7 /* cardvoice.mp3 */; };
+		A55910172591C5200037ADA7 /* GravityCollisionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A55910162591C5200037ADA7 /* GravityCollisionVC.m */; };
+		A559101A2591C5700037ADA7 /* EmitterCellsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A55910192591C5700037ADA7 /* EmitterCellsVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,11 @@
 		A559100B258DE8920037ADA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A559100C258DE8920037ADA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A559101325904CC20037ADA7 /* cardvoice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cardvoice.mp3; sourceTree = "<group>"; };
+		A55910152591C5200037ADA7 /* GravityCollisionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GravityCollisionVC.h; sourceTree = "<group>"; };
+		A55910162591C5200037ADA7 /* GravityCollisionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GravityCollisionVC.m; sourceTree = "<group>"; };
+		A55910182591C5700037ADA7 /* EmitterCellsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmitterCellsVC.h; sourceTree = "<group>"; };
+		A55910192591C5700037ADA7 /* EmitterCellsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmitterCellsVC.m; sourceTree = "<group>"; };
+		A559101C2591C8F20037ADA7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +70,14 @@
 		A5590FF9258DE8910037ADA7 /* Anima */ = {
 			isa = PBXGroup;
 			children = (
+				A559101B2591C5770037ADA7 /* Class */,
 				A5590FFA258DE8910037ADA7 /* AppDelegate.h */,
 				A5590FFB258DE8910037ADA7 /* AppDelegate.m */,
 				A5590FFD258DE8910037ADA7 /* SceneDelegate.h */,
 				A5590FFE258DE8910037ADA7 /* SceneDelegate.m */,
 				A5591000258DE8910037ADA7 /* ViewController.h */,
 				A5591001258DE8910037ADA7 /* ViewController.m */,
+				A559101C2591C8F20037ADA7 /* PrefixHeader.pch */,
 				A5591003258DE8910037ADA7 /* Main.storyboard */,
 				A5591006258DE8920037ADA7 /* Assets.xcassets */,
 				A5591008258DE8920037ADA7 /* LaunchScreen.storyboard */,
@@ -77,6 +86,17 @@
 				A559101325904CC20037ADA7 /* cardvoice.mp3 */,
 			);
 			path = Anima;
+			sourceTree = "<group>";
+		};
+		A559101B2591C5770037ADA7 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				A55910182591C5700037ADA7 /* EmitterCellsVC.h */,
+				A55910192591C5700037ADA7 /* EmitterCellsVC.m */,
+				A55910152591C5200037ADA7 /* GravityCollisionVC.h */,
+				A55910162591C5200037ADA7 /* GravityCollisionVC.m */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,8 +170,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55910172591C5200037ADA7 /* GravityCollisionVC.m in Sources */,
 				A5591002258DE8910037ADA7 /* ViewController.m in Sources */,
 				A5590FFC258DE8910037ADA7 /* AppDelegate.m in Sources */,
+				A559101A2591C5700037ADA7 /* EmitterCellsVC.m in Sources */,
 				A559100D258DE8920037ADA7 /* main.m in Sources */,
 				A5590FFF258DE8910037ADA7 /* SceneDelegate.m in Sources */,
 			);
@@ -296,6 +318,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6NFJ995XMX;
+				GCC_PREFIX_HEADER = "${SRCROOT}/Anima/PrefixHeader.pch";
 				INFOPLIST_FILE = Anima/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -315,6 +338,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6NFJ995XMX;
+				GCC_PREFIX_HEADER = "${SRCROOT}/Anima/PrefixHeader.pch";
 				INFOPLIST_FILE = Anima/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
