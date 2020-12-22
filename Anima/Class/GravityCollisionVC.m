@@ -46,6 +46,12 @@
     [self initSubViews];
 }
 
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.manager stopDeviceMotionUpdates];
+    
+}
 - (void)initSubViews{
     
     for (int i = 0; i<17; i++) {
@@ -95,14 +101,14 @@
         //如果需要在播放完之后执行某些操作，可以调用如下方法注册一个播放完成回调函数
 //        AudioServicesAddSystemSoundCompletion(_soundID, NULL, NULL, soundCompleteCallback, NULL);
 //        //2.播放音频
-//        AudioServicesPlaySystemSound(_soundID);
+        AudioServicesPlaySystemSound(_soundID);
 
         
         // MARK: ---3方法的替代方法
-        AudioServicesPlaySystemSoundWithCompletion(_soundID, ^{
-            AudioServicesDisposeSystemSoundID(self->_soundID);
-        });
-//
+//        AudioServicesPlaySystemSoundWithCompletion(_soundID, ^{
+//            AudioServicesDisposeSystemSoundID(self->_soundID);
+//        });
+
     }
     
 }
