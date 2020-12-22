@@ -14,6 +14,6 @@
 
 #define viewH             [UIScreen mainScreen].bounds.size.height
 #define viewW             [UIScreen mainScreen].bounds.size.width
-
+#import "UIImage+Ex.h"
 
 #endif /* PrefixHeader_pch */

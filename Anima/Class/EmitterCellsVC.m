@@ -62,42 +62,41 @@
 - (void)fireworks {
     CAEmitterCell *cell = [CAEmitterCell new];
     cell.name = @"fireworks";
-    cell.contents = (__bridge id)[UIImage imageNamed:@"19"].CGImage;
-    cell.lifetime = 10;
-    cell.birthRate = 10;
-    
-    cell.velocity = 100;
-    cell.spin = 1;
+    cell.contents = (__bridge id)[UIImage imageWithColor:UIColor.redColor size:CGSizeMake(1, 10)].CGImage;
+    cell.lifetime = 5;
+    cell.birthRate = 100;
+    cell.yAcceleration = - 100;
+    cell.velocity = 1000;
+//    cell.spin = 1;
     // 方向,y轴负方向,2倍emissionRange的扇形范围内
     cell.emissionLongitude = -M_PI_2;
     cell.emissionRange = M_PI_4/4;
     
-    cell.color = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1].CGColor;
-    cell.redRange = 0.1; // 0.1--0.5;
-    cell.blueRange = 0.8;// 0.5--0.8
-    cell.greenRange = 0.3;//0.3--0.5
-    cell.alphaRange = 0.8;// 0.8 -- 1
-    
-    cell.redSpeed = 0.1;
-    cell.greenRange = 0.1;
-    cell.blueSpeed = 0.1;
+//    cell.color = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1].CGColor;
+//    cell.redRange = 0.1; // 0.1--0.5;
+//    cell.blueRange = 0.8;// 0.5--0.8
+//    cell.greenRange = 0.3;//0.3--0.5
+//    cell.alphaRange = 0.8;// 0.8 -- 1
+//
+//    cell.redSpeed = 0.1;
+//    cell.greenRange = 0.1;
+//    cell.blueSpeed = 0.1;
     
     CAEmitterLayer *layer = [CAEmitterLayer layer];
-    layer.position = CGPointMake(viewW/2.0, viewH/2.0);
+    layer.position = CGPointMake(viewW/2.0, viewH-150);
+    layer.emitterSize = CGSizeMake(4, 40);
     layer.emitterShape = kCAEmitterLayerRectangle;
     layer.emitterMode = kCAEmitterLayerSurface;
     
     [self.view.layer addSublayer:layer];
       
       layer.emitterCells = @[cell];
-      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           layer.birthRate = 0;//停止发射
       });
 }
 - (void)test {
     CAEmitterCell *cell1 = [self createCell:@"19"];
-//    CAEmitterCell *cell2 = [self createCell:@"2"];
-//    CAEmitterCell *cell3 = [self createCell:@"3"];
 
     CAEmitterLayer *emitter = [CAEmitterLayer layer];
 //    emitter.frame = CGRectMake(viewW/2.0, viewH/2.0, 10, 10);

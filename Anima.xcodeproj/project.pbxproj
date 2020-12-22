@@ -17,6 +17,7 @@
 		A559101425904CC20037ADA7 /* cardvoice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A559101325904CC20037ADA7 /* cardvoice.mp3 */; };
 		A55910172591C5200037ADA7 /* GravityCollisionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A55910162591C5200037ADA7 /* GravityCollisionVC.m */; };
 		A559101A2591C5700037ADA7 /* EmitterCellsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A55910192591C5700037ADA7 /* EmitterCellsVC.m */; };
+		A55910202591E1450037ADA7 /* UIImage+Ex.m in Sources */ = {isa = PBXBuildFile; fileRef = A559101F2591E1450037ADA7 /* UIImage+Ex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		A55910182591C5700037ADA7 /* EmitterCellsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmitterCellsVC.h; sourceTree = "<group>"; };
 		A55910192591C5700037ADA7 /* EmitterCellsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmitterCellsVC.m; sourceTree = "<group>"; };
 		A559101C2591C8F20037ADA7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A559101E2591E1450037ADA7 /* UIImage+Ex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Ex.h"; sourceTree = "<group>"; };
+		A559101F2591E1450037ADA7 /* UIImage+Ex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Ex.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,7 @@
 		A5590FF9258DE8910037ADA7 /* Anima */ = {
 			isa = PBXGroup;
 			children = (
+				A559101D2591E1210037ADA7 /* Category */,
 				A559101B2591C5770037ADA7 /* Class */,
 				A5590FFA258DE8910037ADA7 /* AppDelegate.h */,
 				A5590FFB258DE8910037ADA7 /* AppDelegate.m */,
@@ -97,6 +101,15 @@
 				A55910162591C5200037ADA7 /* GravityCollisionVC.m */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		A559101D2591E1210037ADA7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				A559101E2591E1450037ADA7 /* UIImage+Ex.h */,
+				A559101F2591E1450037ADA7 /* UIImage+Ex.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +187,7 @@
 				A5591002258DE8910037ADA7 /* ViewController.m in Sources */,
 				A5590FFC258DE8910037ADA7 /* AppDelegate.m in Sources */,
 				A559101A2591C5700037ADA7 /* EmitterCellsVC.m in Sources */,
+				A55910202591E1450037ADA7 /* UIImage+Ex.m in Sources */,
 				A559100D258DE8920037ADA7 /* main.m in Sources */,
 				A5590FFF258DE8910037ADA7 /* SceneDelegate.m in Sources */,
 			);
