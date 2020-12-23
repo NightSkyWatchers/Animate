@@ -24,7 +24,7 @@
 @end
 
 @implementation GravityCollisionVC {
-    
+    NSTimer *_timer;
     SystemSoundID _soundID ;
 }
 
@@ -34,7 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"cardvoice.mp3" ofType:nil];
     NSLog(@"%@",audioFile);
-    
+    self.navigationController.navigationBarHidden = YES;
     //1.获得系统声音ID
     _soundID=0;
     /**
@@ -44,14 +44,36 @@
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL fileURLWithPath:audioFile]), &_soundID);
 
     [self initSubViews];
+//    [self initGrayvityTimer];
+
+    // 开始监听设备重力感应
+//    [self.manager startDeviceMotionUpdatesToQueue:NSOperationQueue.mainQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
+//        // 设置重力方向
+//        self.gryBehvior.gravityDirection = CGVectorMake(motion.gravity.x, -motion.gravity.y);
+//    }];
 }
 
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.manager stopDeviceMotionUpdates];
+    [_timer invalidate];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    self.gryBehvior.gravityDirection = CGVectorMake(1.0-arc4random_uniform(20)/10.0, 1.0-arc4random_uniform(20)/10.0);
+}
+
+- (void)initGrayvityTimer {
+    _timer = [NSTimer timerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self.gryBehvior.gravityDirection = CGVectorMake(1.0-arc4random_uniform(20)/10.0, 1.0-arc4random_uniform(20)/10.0);
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+    [_timer fire];
     
 }
+
 - (void)initSubViews{
     
     for (int i = 0; i<17; i++) {
@@ -64,12 +86,7 @@
         [self.clnBehavior addItem:view];
     }
     
-    // 开始监听
-      [self.manager startDeviceMotionUpdatesToQueue:NSOperationQueue.mainQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
-          // 设置重力方向
-          self.gryBehvior.gravityDirection = CGVectorMake(motion.gravity.x, -motion.gravity.y);
-      }];
-
+   
 }
 
 
@@ -90,7 +107,7 @@
     if (identifier != nil && p.y < self.view.bounds.size.height ) {
         
         // MARK: ---1.  振动：
-//        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         // MARK: ---2.播放音频,其中这个soundID号可以从苹果官方网站找到：http://iphonedevwiki.net/index.php/AudioServices
         //        AudioServicesPlaySystemSound(1007);//播放音效
@@ -101,7 +118,7 @@
         //如果需要在播放完之后执行某些操作，可以调用如下方法注册一个播放完成回调函数
 //        AudioServicesAddSystemSoundCompletion(_soundID, NULL, NULL, soundCompleteCallback, NULL);
 //        //2.播放音频
-        AudioServicesPlaySystemSound(_soundID);
+//        AudioServicesPlaySystemSound(_soundID);
 
         
         // MARK: ---3方法的替代方法
