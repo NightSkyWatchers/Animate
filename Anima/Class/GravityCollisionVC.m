@@ -14,11 +14,13 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface GravityCollisionVC ()<UICollisionBehaviorDelegate>
-
+// 设备重力监听管理者
 @property (nonatomic, strong) CMMotionManager *manager;
+// 物理仿真器
 @property (nonatomic, strong) UIDynamicAnimator *animtor;
-
+// 重力行为
 @property (nonatomic, strong) UIGravityBehavior *gryBehvior;
+// 碰撞行为
 @property (nonatomic, strong) UICollisionBehavior *clnBehavior;
 
 @end
@@ -36,7 +38,7 @@
     NSLog(@"%@",audioFile);
     self.navigationController.navigationBarHidden = YES;
     //1.获得系统声音ID
-    _soundID=0;
+    _soundID = 0;
     /**
      * inFileUrl:音频文件url
      * outSystemSoundID:声音id（此函数会将音效文件加入到系统音频服务中并返回一个长整形ID）
@@ -47,10 +49,10 @@
 //    [self initGrayvityTimer];
 
     // 开始监听设备重力感应
-//    [self.manager startDeviceMotionUpdatesToQueue:NSOperationQueue.mainQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
-//        // 设置重力方向
-//        self.gryBehvior.gravityDirection = CGVectorMake(motion.gravity.x, -motion.gravity.y);
-//    }];
+    [self.manager startDeviceMotionUpdatesToQueue:NSOperationQueue.mainQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
+        // 设置重力方向
+        self.gryBehvior.gravityDirection = CGVectorMake(motion.gravity.x, -motion.gravity.y);
+    }];
 }
 
 
@@ -77,13 +79,14 @@
 - (void)initSubViews{
     
     for (int i = 0; i<17; i++) {
-        
-        UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(viewW/2.0-25, viewH/2.0-25, 50, 50)];
-        
-        view.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
-        [self.view addSubview:view];
-        [self.gryBehvior addItem:view];
-        [self.clnBehavior addItem:view];
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(viewW/2.0-25, viewH/2.0-25, 50, 50)];
+        img.contentMode = UIViewContentModeScaleAspectFit;
+        img.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
+        [self.view addSubview:img];
+
+        // 添加仿真元素
+        [self.gryBehvior addItem:img];
+        [self.clnBehavior addItem:img];
     }
     
    
@@ -142,6 +145,7 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 #pragma mark --- lazy
 - (UIDynamicAnimator *)animtor {
     if (!_animtor) {
+        //创建一个物理仿真器,（顺便设置仿真范围）
         _animtor = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     }
     return _animtor;
@@ -149,6 +153,7 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 
 - (UIGravityBehavior *)gryBehvior {
     if (!_gryBehvior) {
+        //创建重力仿真行为
         _gryBehvior = [[UIGravityBehavior alloc] initWithItems:@[]];
         /*****设置重力加速度 与方向
                 dx = 0 dy > 0  重力正下
@@ -165,7 +170,8 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 //        _gryBehvior.angle = (M_PI_4);
         // 设置重力的加速度,重力的加速度越大，碰撞就越厉害
 //        _gryBehvior.magnitude = 100;
-
+        
+        //将重力仿真行为添加到物理仿真器中开始仿真
         [self.animtor addBehavior:_gryBehvior];
 
     }
@@ -174,12 +180,15 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 
 - (UICollisionBehavior *)clnBehavior {
     if (!_clnBehavior) {
+        //创建物理碰撞仿真行为
         _clnBehavior = [[UICollisionBehavior alloc] initWithItems:@[]];
-//        _clnBehavior.collisionMode = UICollisionBehaviorModeBoundaries;
+        //让参照视图的边框成为碰撞检测的边界
         _clnBehavior.translatesReferenceBoundsIntoBoundary = YES;
         _clnBehavior.collisionDelegate = self;
 
         [_clnBehavior addBoundaryWithIdentifier:@"boudaryID" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(0, 0, viewW, viewH)]];
+        
+        //将碰撞仿真行为添加到物理仿真器中开始仿真
         [self.animtor addBehavior:_clnBehavior];
 
     }
@@ -188,7 +197,9 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 
 - (CMMotionManager *)manager {
     if (!_manager) {
+        // 创建运动管理
         _manager = [[CMMotionManager alloc] init];
+        // 设置更新精度
         _manager.deviceMotionUpdateInterval = 0.01;
     }
     return _manager;
