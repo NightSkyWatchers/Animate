@@ -23,6 +23,7 @@
 // 碰撞行为
 @property (nonatomic, strong) UICollisionBehavior *clnBehavior;
 
+@property (nonatomic, strong) UIDynamicItemBehavior *itemBehavior;
 @end
 
 @implementation GravityCollisionVC {
@@ -79,14 +80,15 @@
 - (void)initSubViews{
     
     for (int i = 0; i<17; i++) {
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(viewW/2.0-25, viewH/2.0-25, 50, 50)];
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(viewW/2.0-25, 15, 50, 50)];
         img.contentMode = UIViewContentModeScaleAspectFit;
         img.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
         [self.view addSubview:img];
 
         // 添加仿真元素
-        [self.gryBehvior addItem:img];
         [self.clnBehavior addItem:img];
+        [self.itemBehavior addItem:img];
+        [self.gryBehvior addItem:img];
     }
     
    
@@ -205,4 +207,13 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
     return _manager;
 }
 
+- (UIDynamicItemBehavior *)itemBehavior {
+    if (!_itemBehavior) {
+        _itemBehavior = [[UIDynamicItemBehavior alloc] init];
+        // 弹性
+        _itemBehavior.elasticity = 1.0;
+        [self.animtor addBehavior:_itemBehavior];
+    }
+    return _itemBehavior;
+}
 @end
