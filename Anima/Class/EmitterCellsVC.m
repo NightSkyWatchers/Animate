@@ -62,11 +62,12 @@
 - (void)fireworks {
     CAEmitterCell *cell = [CAEmitterCell new];
     cell.name = @"fireworks";
-    cell.contents = (__bridge id)[UIImage imageWithColor:UIColor.redColor size:CGSizeMake(1, 10)].CGImage;
+    
+    cell.contents = (__bridge id)[UIImage imageNamed:@"2"].CGImage;
     cell.lifetime = 5;
-    cell.birthRate = 100;
+    cell.birthRate = 2;
     cell.yAcceleration = - 100;
-    cell.velocity = 1000;
+    cell.velocity = 20;
 //    cell.spin = 1;
     // 方向,y轴负方向,2倍emissionRange的扇形范围内
     cell.emissionLongitude = -M_PI_2;
@@ -91,7 +92,7 @@
     [self.view.layer addSublayer:layer];
       
       layer.emitterCells = @[cell];
-      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           layer.birthRate = 0;//停止发射
       });
 }

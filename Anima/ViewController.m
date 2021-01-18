@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.view.backgroundColor = [UIColor whiteColor];
     UIButton *btn1 = [self returnButtonWithTitle:@"重力感应"];
     
     UIButton *btn2 = [self returnButtonWithTitle:@"粒子动画"];

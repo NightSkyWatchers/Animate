@@ -37,7 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"cardvoice.mp3" ofType:nil];
     NSLog(@"%@",audioFile);
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
     //1.获得系统声音ID
     _soundID = 0;
     /**
